@@ -1,0 +1,7 @@
+node_modules/
+playwright-report/
+test-results/
+rappi-output*.json
+platform-compare*.json
+uber-output*.json
+*.png

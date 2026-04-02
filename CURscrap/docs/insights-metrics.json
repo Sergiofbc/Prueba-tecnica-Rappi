@@ -1,0 +1,232 @@
+{
+  "generatedAt": "2026-04-01T22:03:03.775Z",
+  "geo": {
+    "address": "JW MARRIOTT HOTEL MEXICO CITY POLANCO, Calle Andrés Bello 29, Polanco IV Sección, 11550 Miguel Hidalgo, CDMX, México",
+    "note": "Un solo punto (Polanco / JW Marriott). La variabilidad geográfica requiere más corridas."
+  },
+  "basket": {
+    "pairsCompared": 19,
+    "comparablePairs": 18,
+    "avgRappiMxn": 238.83,
+    "avgUberMxn": 208.89,
+    "rappiPricedHigherCount": 9,
+    "uberPricedHigherCount": 0,
+    "tieCount": 9
+  },
+  "fees": {
+    "rappiDeliveryMxn": 30,
+    "uberDeliveryMxn": 0,
+    "serviceFeeNote": "Service fees no estandarizados en los JSON de scrape; revisar checkout en ambas apps."
+  },
+  "ops": {
+    "uberEtaMinutesMid": 17,
+    "rappiEtaMinutes": null,
+    "note": "El scrape de Rappi no captura ETA explícito; ampliar pipeline."
+  },
+  "promos": {
+    "rappiProductsWithVisibleDiscount": 8,
+    "rappiProductTotal": 20,
+    "uberProductsMatchedWithDiscount": 0,
+    "uberMatchedTotal": 19
+  },
+  "rows": [
+    {
+      "name": "Big Mac Tocino + favoritos",
+      "short": "Big Mac Tocino + favoritos",
+      "rappiMxn": 328,
+      "uberMxn": 199,
+      "deltaMxn": 129,
+      "deltaPct": 64.8,
+      "rappiDiscount": "39%",
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "McTrío mediano Big Mac Tocino",
+      "short": "McTrío mediano Big Mac Toc…",
+      "rappiMxn": 169,
+      "uberMxn": 169,
+      "deltaMxn": 0,
+      "deltaPct": 0,
+      "rappiDiscount": null,
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "Cajita Feliz McNuggets Plus",
+      "short": "Cajita Feliz McNuggets Plu…",
+      "rappiMxn": 277,
+      "uberMxn": 229,
+      "deltaMxn": 48,
+      "deltaPct": 21,
+      "rappiDiscount": "14%",
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "McTrío Hamb con Queso",
+      "short": "McTrío Hamb con Queso",
+      "rappiMxn": 95,
+      "uberMxn": 95,
+      "deltaMxn": 0,
+      "deltaPct": 0,
+      "rappiDiscount": null,
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "McTrío Hamb Dbl con Queso",
+      "short": "McTrío Hamb Dbl con Queso",
+      "rappiMxn": 105,
+      "uberMxn": 105,
+      "deltaMxn": 0,
+      "deltaPct": 0,
+      "rappiDiscount": null,
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "McTrío Hamb Triple con Queso",
+      "short": "McTrío Hamb Triple con Que…",
+      "rappiMxn": 115,
+      "uberMxn": 115,
+      "deltaMxn": 0,
+      "deltaPct": 0,
+      "rappiDiscount": null,
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "McTrío mediano Hamburguesa Queso Spicy",
+      "short": "McTrío mediano Hamburguesa…",
+      "rappiMxn": 115,
+      "uberMxn": 115,
+      "deltaMxn": 0,
+      "deltaPct": 0,
+      "rappiDiscount": null,
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "McTrío mediano McPollo",
+      "short": "McTrío mediano McPollo",
+      "rappiMxn": 115,
+      "uberMxn": 99,
+      "deltaMxn": 16,
+      "deltaPct": 16.2,
+      "rappiDiscount": "14%",
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "Paquete Me encanta",
+      "short": "Paquete Me encanta",
+      "rappiMxn": 232,
+      "uberMxn": 129,
+      "deltaMxn": 103,
+      "deltaPct": 79.8,
+      "rappiDiscount": "35%",
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "Paquete Botanero",
+      "short": "Paquete Botanero",
+      "rappiMxn": 194,
+      "uberMxn": 115,
+      "deltaMxn": 79,
+      "deltaPct": 68.7,
+      "rappiDiscount": "23%",
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "McTrío Big Mac mediano+McFlurry Oreo",
+      "short": "McTrío Big Mac mediano+McF…",
+      "rappiMxn": 218,
+      "uberMxn": 169,
+      "deltaMxn": 49,
+      "deltaPct": 29,
+      "rappiDiscount": "22%",
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "Paquete Consentidos",
+      "short": "Paquete Consentidos",
+      "rappiMxn": 525,
+      "uberMxn": 503,
+      "deltaMxn": 22,
+      "deltaPct": 4.4,
+      "rappiDiscount": null,
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "LateNight + Postres",
+      "short": "LateNight + Postres",
+      "rappiMxn": 585,
+      "uberMxn": 583,
+      "deltaMxn": 2,
+      "deltaPct": 0.3,
+      "rappiDiscount": null,
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "Paquete para 4",
+      "short": "Paquete para 4",
+      "rappiMxn": 580,
+      "uberMxn": 489,
+      "deltaMxn": 91,
+      "deltaPct": 18.6,
+      "rappiDiscount": "14%",
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "McTrío mediano Mario Galaxy Big Mac",
+      "short": "McTrío mediano Mario Galax…",
+      "rappiMxn": 149,
+      "uberMxn": 149,
+      "deltaMxn": 0,
+      "deltaPct": 0,
+      "rappiDiscount": null,
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "McTrío mediano Mario Galaxy Cuarto de Libra",
+      "short": "McTrío mediano Mario Galax…",
+      "rappiMxn": 159,
+      "uberMxn": 159,
+      "deltaMxn": 0,
+      "deltaPct": 0,
+      "rappiDiscount": null,
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "McTrío mediano Mario Galaxy 10 McNuggets",
+      "short": "McTrío mediano Mario Galax…",
+      "rappiMxn": 159,
+      "uberMxn": 159,
+      "deltaMxn": 0,
+      "deltaPct": 0,
+      "rappiDiscount": null,
+      "uberDiscount": null,
+      "comparable": true
+    },
+    {
+      "name": "McTrío mediano McCrispy Cajún",
+      "short": "McTrío mediano McCrispy Ca…",
+      "rappiMxn": 179,
+      "uberMxn": 179,
+      "deltaMxn": 0,
+      "deltaPct": 0,
+      "rappiDiscount": null,
+      "uberDiscount": null,
+      "comparable": true
+    }
+  ]
+}

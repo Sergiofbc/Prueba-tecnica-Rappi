@@ -1,0 +1,21 @@
+{
+  "name": "curscrap-rappi",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "scrape": "node scrape-rappi.mjs",
+    "scrape:headed": "node scrape-rappi.mjs --headed",
+    "scrape:debug": "node scrape-rappi.mjs --debug",
+    "uber": "node scrape-ubereats-compare.mjs",
+    "uber:headed": "node scrape-ubereats-compare.mjs --headed",
+    "uber:debug": "node scrape-ubereats-compare.mjs --debug",
+    "compare": "node scrape-ubereats-compare.mjs",
+    "compare:headed": "node scrape-ubereats-compare.mjs --headed",
+    "compare:debug": "node scrape-ubereats-compare.mjs --debug",
+    "report": "node generate-insights-dashboard.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}

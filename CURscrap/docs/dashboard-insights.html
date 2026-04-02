@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Insights competitivos — Rappi vs Uber Eats</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root { font-family: 'Segoe UI', system-ui, sans-serif; color: #111827; background: #f9fafb; }
+    body { margin: 0; padding: 1.5rem 2rem 3rem; max-width: 1200px; margin-inline: auto; }
+    h1 { font-size: 1.5rem; font-weight: 650; }
+    h2 { font-size: 1.1rem; margin-top: 2rem; color: #374151; }
+    .meta { color: #6b7280; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem; margin: 1rem 0 2rem; }
+    .kpi { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 0.85rem 1rem; }
+    .kpi strong { display: block; font-size: 1.25rem; }
+    .kpi span { font-size: 0.8rem; color: #6b7280; }
+    .grid2 { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media (min-width: 900px) { .grid2 { grid-template-columns: 1fr 1fr; } }
+    .chart-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1rem 0.5rem; margin-bottom: 1rem; }
+    canvas { max-height: 380px; }
+    table.heat { width: 100%; border-collapse: collapse; font-size: 0.8rem; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; }
+    table.heat th, table.heat td { padding: 0.45rem 0.65rem; text-align: left; border-bottom: 1px solid #f3f4f6; }
+    table.heat th { background: #f9fafb; font-weight: 600; }
+    .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: middle; margin-right: 6px; }
+    footer { margin-top: 2rem; font-size: 0.8rem; color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <h1>Informe visual — Posicionamiento Rappi vs Uber Eats (McDonald's)</h1>
+  <p class="meta">Generado: 2026-04-01T22:03:03.775Z<br/>Zona: una corrida en <code>Polanco</code> · Datos: <code>rappi-output.json</code> + <code>uber-output.json</code></p>
+
+  <div class="kpis">
+    <div class="kpi"><span>Pares comparables</span><strong>18</strong></div>
+    <div class="kpi"><span>Precio medio lista (comparable)</span><strong>R $238.83 · U $208.89</strong></div>
+    <div class="kpi"><span>Ítems más caros en Rappi (&gt;$1)</span><strong>9</strong></div>
+    <div class="kpi"><span>Empates (~$0 diff)</span><strong>9</strong></div>
+    <div class="kpi"><span>Delivery fee Rappi</span><strong>$30 MXN</strong></div>
+    <div class="kpi"><span>Delivery fee Uber (texto scrape)</span><strong>$0 MXN</strong></div>
+    <div class="kpi"><span>ETA Uber (aprox.)</span><strong>17 min</strong></div>
+    <div class="kpi"><span>Promos visibles Rappi (muestra)</span><strong>8/20</strong></div>
+  </div>
+
+  <h2>1. Comparación de precios por ítem (barras agrupadas)</h2>
+  <div class="chart-box"><canvas id="c1"></canvas></div>
+
+  <div class="grid2">
+    <div>
+      <h2>2. Delta % precio (Rappi vs Uber)</h2>
+      <p style="font-size:0.85rem;color:#6b7280;">Positivo = Rappi más caro que Uber para ese SKU.</p>
+      <div class="chart-box"><canvas id="c2"></canvas></div>
+    </div>
+    <div>
+      <h2>3. Fees de entrega (comparación directa)</h2>
+      <div class="chart-box"><canvas id="c3"></canvas></div>
+    </div>
+  </div>
+
+  <h2>4. Heatmap textual — brecha % por producto</h2>
+  <table class="heat">
+    <thead><tr><th>Producto</th><th>Δ % (Rappi vs Uber)</th></tr></thead>
+    <tbody>
+      <tr><td><span class="swatch" style="background:#fecaca"></span>Big Mac Tocino + favoritos</td><td>64.8%</td></tr>
+      <tr><td><span class="swatch" style="background:#e0f2fe"></span>McTrío mediano Big Mac Toc…</td><td>0%</td></tr>
+      <tr><td><span class="swatch" style="background:#fecaca"></span>Cajita Feliz McNuggets Plu…</td><td>21%</td></tr>
+      <tr><td><span class="swatch" style="background:#e0f2fe"></span>McTrío Hamb con Queso</td><td>0%</td></tr>
+      <tr><td><span class="swatch" style="background:#e0f2fe"></span>McTrío Hamb Dbl con Queso</td><td>0%</td></tr>
+      <tr><td><span class="swatch" style="background:#e0f2fe"></span>McTrío Hamb Triple con Que…</td><td>0%</td></tr>
+      <tr><td><span class="swatch" style="background:#e0f2fe"></span>McTrío mediano Hamburguesa…</td><td>0%</td></tr>
+      <tr><td><span class="swatch" style="background:#fecaca"></span>McTrío mediano McPollo</td><td>16.2%</td></tr>
+      <tr><td><span class="swatch" style="background:#fecaca"></span>Paquete Me encanta</td><td>79.8%</td></tr>
+      <tr><td><span class="swatch" style="background:#fecaca"></span>Paquete Botanero</td><td>68.7%</td></tr>
+      <tr><td><span class="swatch" style="background:#fecaca"></span>McTrío Big Mac mediano+McF…</td><td>29%</td></tr>
+      <tr><td><span class="swatch" style="background:#e0f2fe"></span>Paquete Consentidos</td><td>4.4%</td></tr>
+      <tr><td><span class="swatch" style="background:#e0f2fe"></span>LateNight + Postres</td><td>0.3%</td></tr>
+      <tr><td><span class="swatch" style="background:#fecaca"></span>Paquete para 4</td><td>18.6%</td></tr>
+      <tr><td><span class="swatch" style="background:#e0f2fe"></span>McTrío mediano Mario Galax…</td><td>0%</td></tr>
+      <tr><td><span class="swatch" style="background:#e0f2fe"></span>McTrío mediano Mario Galax…</td><td>0%</td></tr>
+      <tr><td><span class="swatch" style="background:#e0f2fe"></span>McTrío mediano Mario Galax…</td><td>0%</td></tr>
+      <tr><td><span class="swatch" style="background:#e0f2fe"></span>McTrío mediano McCrispy Ca…</td><td>0%</td></tr>
+    </tbody>
+  </table>
+
+  <footer>Documento complementario al Informe de Insights en <code>docs/INFORME_INSIGHTS_COMPETITIVOS.md</code>. Exportar a PDF: imprimir desde el navegador o usar “Print to PDF”.</footer>
+
+  <script>
+    const L = ["Big Mac Tocino + favoritos","McTrío mediano Big Mac Toc…","Cajita Feliz McNuggets Plu…","McTrío Hamb con Queso","McTrío Hamb Dbl con Queso","McTrío Hamb Triple con Que…","McTrío mediano Hamburguesa…","McTrío mediano McPollo","Paquete Me encanta","Paquete Botanero","McTrío Big Mac mediano+McF…","Paquete Consentidos","LateNight + Postres","Paquete para 4","McTrío mediano Mario Galax…","McTrío mediano Mario Galax…","McTrío mediano Mario Galax…","McTrío mediano McCrispy Ca…"];
+    Chart.defaults.font.family = "'Segoe UI',system-ui,sans-serif";
+    new Chart(document.getElementById('c1'), {
+      type: 'bar',
+      data: {
+        labels: L,
+        datasets: [
+          { label: 'Rappi (MXN)', data: [328,169,277,95,105,115,115,115,232,194,218,525,585,580,149,159,159,179], backgroundColor: 'rgba(234, 88, 12, 0.85)' },
+          { label: 'Uber Eats (MXN)', data: [199,169,229,95,105,115,115,99,129,115,169,503,583,489,149,159,159,179], backgroundColor: 'rgba(37, 99, 235, 0.85)' }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'top' } },
+        scales: {
+          x: { ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 } } },
+          y: { title: { display: true, text: 'MXN' } }
+        }
+      }
+    });
+    new Chart(document.getElementById('c2'), {
+      type: 'bar',
+      data: {
+        labels: L,
+        datasets: [{
+          label: 'Δ % precio (Rappi − Uber) / Uber',
+          data: [64.8,0,21,0,0,0,0,16.2,79.8,68.7,29,4.4,0.3,18.6,0,0,0,0],
+          backgroundColor: ["#dc2626","#ca8a04","#dc2626","#ca8a04","#ca8a04","#ca8a04","#ca8a04","#dc2626","#dc2626","#dc2626","#dc2626","#ca8a04","#ca8a04","#dc2626","#ca8a04","#ca8a04","#ca8a04","#ca8a04"]
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { x: { title: { display: true, text: '%' } } }
+      }
+    });
+    new Chart(document.getElementById('c3'), {
+      type: 'bar',
+      data: {
+        labels: ['Rappi', 'Uber Eats'],
+        datasets: [{ label: 'Delivery fee (MXN)', data: [30, 0], backgroundColor: ['rgba(234, 88, 12, 0.9)', 'rgba(37, 99, 235, 0.9)'] }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, title: { display: true, text: 'MXN' } } }
+      }
+    });
+  </script>
+</body>
+</html>
