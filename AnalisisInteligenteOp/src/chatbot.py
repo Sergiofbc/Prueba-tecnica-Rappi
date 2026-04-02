@@ -271,48 +271,64 @@ class RappiChatbot:
 
         return {"text": "No se encontraron zonas con alto Lead Penetration y bajo Perfect Order", "figure": None}
 
+        
     def _handle_inference(self, query: str) -> Dict[str, Any]:
         """Inferencia sobre causas de crecimiento"""
-        # Identificar zonas con mayor crecimiento en órdenes
-        df_orders = pd.read_csv('data/ordenes.csv')
-        df_orders_long = pd.melt(
-            df_orders,
-            id_vars=['COUNTRY', 'CITY', 'ZONE', 'METRIC'],
-            value_vars=['L8W', 'L7W', 'L6W', 'L5W', 'L4W', 'L3W', 'L2W', 'L1W', 'L0W'],
-            var_name='WEEK',
-            value_name='ORDERS'
-        )
-        df_orders_long['WEEK_NUM'] = df_orders_long['WEEK'].str.extract(r'L(\d+)W').astype(int)
-
+        from src.data_loader import load_orders_data
+        
+        # Usar la misma función que carga órdenes correctamente
+        df_orders_long = load_orders_data()
+        
+        if df_orders_long is None or len(df_orders_long) == 0:
+            return {"text": "No se encontraron datos de órdenes para analizar.", "figure": None}
+        
         # Calcular crecimiento últimas 5 semanas
         latest_orders = df_orders_long[df_orders_long['WEEK_NUM'] == 0].groupby('ZONE')['ORDERS'].sum()
         earliest_orders = df_orders_long[df_orders_long['WEEK_NUM'] == 4].groupby('ZONE')['ORDERS'].sum()
-
-        growth = ((latest_orders - earliest_orders) / earliest_orders * 100).sort_values(ascending=False)
+        
+        # Evitar división por cero
+        growth = pd.Series(index=latest_orders.index, dtype=float)
+        for zone in latest_orders.index:
+            if zone in earliest_orders.index and earliest_orders[zone] > 0:
+                growth[zone] = ((latest_orders[zone] - earliest_orders[zone]) / earliest_orders[zone] * 100)
+            else:
+                growth[zone] = 0
+        
+        growth = growth.sort_values(ascending=False)
         top_growth = growth.head(5)
-
-        # Usar Gemini para análisis
+        top_growth = top_growth[top_growth > 0]  # Solo crecimiento positivo
+        
+        if len(top_growth) == 0:
+            return {"text": "No se encontraron zonas con crecimiento positivo en órdenes en las últimas 5 semanas.", "figure": None}
+        
+        # Usar Gemini/NVIDIA para análisis
+        zones_list = "\n".join([f"- {zone}: +{growth_pct:.1f}%" for zone, growth_pct in top_growth.items()])
+        
         analysis_prompt = f"""
         Las siguientes zonas han tenido el mayor crecimiento en órdenes en las últimas 5 semanas:
-        {top_growth.to_string()}
-
-        Basado en las métricas operacionales típicas (Lead Penetration, Perfect Orders, Pro Adoption, etc.),
+        {zones_list}
+        
+        Basado en métricas operacionales típicas de Rappi (Lead Penetration, Perfect Orders, Pro Adoption, Gross Profit UE, etc.),
         ¿qué podrían estar haciendo bien estas zonas? ¿Qué factores podrían explicar su crecimiento?
-        Proporciona un análisis breve (3-4 líneas) con hipótesis accionables.
+        Proporciona un análisis breve (3-4 líneas) con hipótesis accionables para el equipo de Operations.
         """
-
+        
         analysis = self.llm.chat([{"role": "user", "content": analysis_prompt}])
-
+        
         result_text = f"🚀 **Zonas con mayor crecimiento en órdenes (últimas 5 semanas):**\n\n"
         for zone, growth_pct in top_growth.items():
-            result_text += f"- {zone}: +{growth_pct:.1f}%\n"
-        result_text += f"\n💡 **Análisis:**\n{analysis}"
-
+            result_text += f"- **{zone}**: +{growth_pct:.1f}%\n"
+        result_text += f"\n💡 **Análisis de causas potenciales:**\n{analysis}"
+        
         # Gráfico de crecimiento
         growth_df = pd.DataFrame({'Zona': top_growth.index, 'Crecimiento %': top_growth.values})
-        fig = px.bar(growth_df, x='Zona', y='Crecimiento %', title="Top 5 zonas con mayor crecimiento")
-
+        fig = px.bar(growth_df, x='Zona', y='Crecimiento %', 
+                    title="Top 5 zonas con mayor crecimiento en órdenes",
+                    color='Crecimiento %',
+                    color_continuous_scale='Greens')
+        
         return {"text": result_text, "figure": fig}
+
 
     def _handle_general(self, query: str) -> Dict[str, Any]:
         """Consulta general usando Gemini"""
